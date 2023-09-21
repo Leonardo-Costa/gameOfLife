@@ -21,7 +21,7 @@ def plotGraph(dataRootFolder, seconds, name):
     plt.savefig(dataRootFolder + f'{name}.png')
     plt.clf()
 
-def analyzeData(path, name, threads=[1, 2, 4, 8], dataRootFolder='../../data/', generations=200):
+def analyzeData(path, name, threads=[1, 2, 4, 8], dataRootFolder='../../data/', generations=2000):
     seconds = []
 
     for i in threads:
