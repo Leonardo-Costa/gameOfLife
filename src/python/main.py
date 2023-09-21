@@ -7,8 +7,8 @@ def __main__():
         'pthreads': '../c/pthreads/main.exe'
     }
 
-    analyzeData(paths['openmp'], 'openmp', generations=10)
-    analyzeData(paths['pthreads'], 'pthreads', generations=10)
+    analyzeData(paths['openmp'], 'openmp', generations=2000)
+    analyzeData(paths['pthreads'], 'pthreads', generations=2000)
     
     
 if __name__ == '__main__':
