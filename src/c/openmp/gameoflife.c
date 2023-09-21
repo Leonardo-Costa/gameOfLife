@@ -81,6 +81,11 @@ void drawPentomino(float **grid)
   grid[y + 2][x + 1] = 1.0;
 }
 
+void computeDivision(float neighbors)
+{
+  float result = neighbors / 8;
+}
+
 int getNeighbors(float **grid, int i, int j)
 {
   int neighbors = 0;
@@ -99,7 +104,9 @@ int getNeighbors(float **grid, int i, int j)
     }
   }
 
-  return neighbors;
+  computeDivision(neighbors);
+
+  return (float)neighbors;
 }
 
 void updateState(float ***grid, float ***newGrid, int numThreads)
@@ -155,7 +162,24 @@ void updateState(float ***grid, float ***newGrid, int numThreads)
   }
 }
 
-void loop(float **grid, float **newGrid, int numThreads, int generations)
+int countLiveCells(float **grid)
+{
+  int count = 0;
+
+  for (int i = 0; i < row; i++)
+  {
+    for (int j = 0; j < col; j++)
+    {
+      if (grid[i][j] == 1.0)
+      {
+        count += 1;
+      }
+    }
+  }
+  return count;
+}
+
+int loop(float **grid, float **newGrid, int numThreads, int generations)
 {
   for (int i = 0; i < generations; i++)
   {
@@ -165,4 +189,6 @@ void loop(float **grid, float **newGrid, int numThreads, int generations)
     grid = newGrid;
     newGrid = temp;
   }
+
+  return countLiveCells(newGrid);
 }

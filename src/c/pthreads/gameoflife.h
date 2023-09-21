@@ -11,6 +11,8 @@ void drawGlider(float **grid);
 void drawPentomino(float **grid);
 int getNeighbors(float **grid, int i, int j);
 void updateState(float ***grid, float ***newGrid, int numThreads);
-void loop(float **grid, float **newGrid, int numThreads, int generations);
+int loop(float **grid, float **newGrid, int numThreads, int generations);
+int countLiveCells(float **grid);
+void computeDivision(float neighbors);
 
 #endif // GAMEOFLIFE_H
