@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def runProgram(path, numThreads, generations):
+    print(f'runnning {path} with {numThreads} thread(s) for {generations} generations')
     try:
         result = subprocess.run([path, str(numThreads), str(generations)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         output_str = result.stdout.strip()
