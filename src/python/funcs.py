@@ -66,7 +66,7 @@ def plotGraphs(seconds_1, seconds_2, threads=[1, 2, 4, 8, 16, 32], dataRootFolde
     
     max_y_value = max(max(speedup_1), max(speedup_2))
     max_x_position = threads[speedup_1.index(max(speedup_1))]
-    plt.text(max_x_position, max_y_value + 0.3, f'{max_y_value:.2f} s', ha='center', va='bottom', fontsize=10)
+    plt.text(max_x_position, max_y_value + 0.3, f'{max_y_value:.2f}', ha='center', va='bottom', fontsize=10)
 
     plt.xticks(threads)
     plt.yticks(np.arange(0, 1.2 * max_speedup, 1))
