@@ -6,7 +6,7 @@ def generateData():
         'pthreads': '../c/pthreads/main.exe'
     }
 
-    openmp = getPerformance(paths['openmp'], generations=10)
-    pthreads = getPerformance(paths['pthreads'], generations=10)
+    openmp = getPerformance(paths['openmp'], generations=2000)
+    pthreads = getPerformance(paths['pthreads'], generations=2000)
 
     writeCSV(openmp, pthreads)
