@@ -1,15 +1,9 @@
-from funcs import runProgram, plotGraph, analyzeData
+from generate_data import generateData
+from analyze_data import analyzeData
 
+def main():
+    #generateData()
+    analyzeData()
 
-def __main__():
-    paths = {
-        'openmp': '../c/openmp/main.exe',
-        'pthreads': '../c/pthreads/main.exe'
-    }
-
-    analyzeData(paths['openmp'], 'openmp', generations=2000)
-    analyzeData(paths['pthreads'], 'pthreads', generations=2000)
-    
-    
 if __name__ == '__main__':
-    __main__()
+    main()
