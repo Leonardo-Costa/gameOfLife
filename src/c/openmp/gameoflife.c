@@ -44,9 +44,9 @@ void allocateGrid(float ***grid, float ***newGrid)
 
 void printGrid(float **grid)
 {
-  for (int i = 0; i < row; i++)
+  for (int i = 0; i < 50; i++)
   {
-    for (int j = 0; j < col; j++)
+    for (int j = 0; j < 50; j++)
     {
       if (grid[i][j] == 0.0)
       {
@@ -184,6 +184,9 @@ int loop(float **grid, float **newGrid, int numThreads, int generations)
   for (int i = 0; i < generations; i++)
   {
     updateState(&grid, &newGrid, numThreads);
+    // printGrid(newGrid);
+    // usleep(30000);         // pausa a tela
+    // printf("\033[H\033[J"); // limpa a tela
 
     float **temp = grid;
     grid = newGrid;

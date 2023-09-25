@@ -86,3 +86,9 @@ Isso se deve ao fato do processador utilizado ter 12 cores, implicando que o par
 A tabela abaixo mostra uma tabela com a quantidade de threads, o tempo de execução do programa, o speedup e a eficiência para cada um dos casos.
 
 ![Análise em tabela do tempo de execução, speedup e eficiência dos códigos com Pthreads e OpenMP](./data/images/performance_table.png)
+
+## Máquina utilizada para teste:
+
+- 8GB de memória RAM DDR5
+- Processador Intel Core I5-12500H com 12 Cores
+

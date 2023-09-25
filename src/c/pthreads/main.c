@@ -26,23 +26,6 @@ int runGameOfLife(int numThreads, int generations)
     return numberOfLiveCells;
 }
 
-int countLiveCells(float **grid)
-{
-  int count = 0;
-
-  for (int i = 0; i < row; i++)
-  {
-    for (int j = 0; j < col; j++)
-    {
-      if (grid[i][j] == 1.0)
-      {
-        count += 1;
-      }
-    }
-  }
-  return count;
-}
-
 int main(int argc, char *argv[])
 {
     int numberOfLiveCells;
