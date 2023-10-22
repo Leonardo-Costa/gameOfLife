@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <omp.h>
+#include <time.h>
 
 struct ThreadData
 {
@@ -162,24 +163,22 @@ void updateState(float ***grid, float ***newGrid, int numThreads)
   }
 }
 
-int countLiveCells(float **grid)
-{
-  int count = 0;
+int countLiveCells(float **grid) {
+    int count = 0;
 
-  for (int i = 0; i < row; i++)
-  {
-    for (int j = 0; j < col; j++)
-    {
-      if (grid[i][j] == 1.0)
-      {
-        count += 1;
-      }
+    #pragma omp parallel for reduction(+:count)
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            if (grid[i][j] == 1.0) {
+                count += 1;
+            }
+        }
     }
-  }
-  return count;
+
+    return count;
 }
 
-int loop(float **grid, float **newGrid, int numThreads, int generations)
+gameResult loop(float **grid, float **newGrid, int numThreads, int generations)
 {
   for (int i = 0; i < generations; i++)
   {
@@ -193,5 +192,17 @@ int loop(float **grid, float **newGrid, int numThreads, int generations)
     newGrid = temp;
   }
 
-  return countLiveCells(newGrid);
+  clock_t startTime, endTime;
+
+  startTime = clock();
+  float numberOfLiveCells = countLiveCells(newGrid);
+  endTime = clock();
+
+  float executionTime = (float)(endTime - startTime) / CLOCKS_PER_SEC;
+
+  gameResult result;
+  result.numberOfLiveCells = numberOfLiveCells;
+  result.executionTime = executionTime;
+
+  return result;
 }

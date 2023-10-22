@@ -4,6 +4,8 @@ import numpy as np
 import csv
 import pandas as pd
 
+dataFolder = '../../../data/omp_critical/'
+
 def runProgram(path, numThreads, generations):
     print(f'runnning {path} with {numThreads} thread(s) for {generations} generations')
     try:
@@ -16,7 +18,7 @@ def runProgram(path, numThreads, generations):
         print(f"An error occurred: {e}")
     return float(output_str)
 
-def plotGraph(seconds, name, threads=[1, 2, 4, 8, 16, 32], dataRootFolder='../../data/images/'):
+def plotGraph(seconds, name, threads=[1, 2, 4, 8, 16, 32], dataRootFolder=dataFolder+'images/'):
     plt.xlabel('Número de threads')
     plt.ylabel('Segundos')
     plt.title(f'{name}')
@@ -29,7 +31,7 @@ def plotGraph(seconds, name, threads=[1, 2, 4, 8, 16, 32], dataRootFolder='../..
     plt.clf()
 
 
-def plotGraphs(seconds_1, seconds_2, threads=[1, 2, 4, 8, 16, 32], dataRootFolder='../../data/images/'):
+def plotGraphs(seconds_1, seconds_2, threads=[1, 2, 4, 8, 16, 32], dataRootFolder=dataFolder+'images/'):
     plt.figure(figsize=(12, 5))
     
     plt.subplot(1, 2, 1)
@@ -78,7 +80,7 @@ def plotGraphs(seconds_1, seconds_2, threads=[1, 2, 4, 8, 16, 32], dataRootFolde
     plt.savefig(dataRootFolder + 'openmp_pthreads.png')
     plt.clf()
 
-def getPerformance(path, threads=[1, 2, 4, 8, 16, 32], generations=2000):
+def getPerformance(path, threads=[1, 2, 4, 8, 16, 32], generations=20):
     seconds = []
 
     for i in threads:
@@ -86,7 +88,7 @@ def getPerformance(path, threads=[1, 2, 4, 8, 16, 32], generations=2000):
 
     return seconds
 
-def writeCSV(openmp, pthreads, output_filename='../../data/csv/performance_data.csv'):
+def writeCSV(openmp, pthreads, output_filename=dataFolder+'csv/performance_data.csv'):
     combined_names = list(zip(openmp, pthreads))
 
     with open(output_filename, 'w', newline='') as csvfile:
@@ -94,7 +96,7 @@ def writeCSV(openmp, pthreads, output_filename='../../data/csv/performance_data.
         csvwriter.writerow(['openmp', 'pthreads'])
         csvwriter.writerows(combined_names)
 
-def readCSV(input_filename='../../data/csv/performance_data.csv'):
+def readCSV(input_filename=dataFolder+'csv/performance_data.csv'):
     openmp = []
     pthreads = []
 
@@ -110,7 +112,7 @@ def readCSV(input_filename='../../data/csv/performance_data.csv'):
 
     return openmp, pthreads
 
-def createPerformanceTable(seconds_array, threads=[1, 2, 4, 8, 16, 32], output_folder='../../data/'):
+def createPerformanceTable(seconds_array, threads=[1, 2, 4, 8, 16, 32], output_folder=dataFolder+''):
     base_time = seconds_array[0]
     speedup = [round(base_time / seconds, 2) for seconds in seconds_array]
     efficiency = [round(s / t, 2) for s, t in zip(speedup, threads)]
@@ -135,3 +137,15 @@ def createPerformanceTable(seconds_array, threads=[1, 2, 4, 8, 16, 32], output_f
     table.scale(1, 1.5)
     plt.savefig(f'{output_folder}images/performance_table.png', bbox_inches='tight')
     plt.clf()
+
+def compile():
+    try:        
+        openmp_compile_command = f'gcc -fopenmp -o ../c/openmp/main ../c/openmp/main.c ../c/openmp/gameoflife.c'
+        subprocess.run(openmp_compile_command)
+
+        pthreads_compile_command = f'gcc -o ../c/pthreads/main ../c/pthreads/main.c -lpthread ../c/pthreads/gameoflife.c'
+        subprocess.run(pthreads_compile_command)
+    except:
+        print('erro ao compilar')
+    else:
+        print('sucesso ao compilar')
