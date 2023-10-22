@@ -1,3 +1,4 @@
+#Leonardo Loureiro Costa
 from funcs import readCSV, plotGraph, plotGraphs, createPerformanceTable
 
 def analyzeData():

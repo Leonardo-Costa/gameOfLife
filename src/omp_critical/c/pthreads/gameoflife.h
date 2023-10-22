@@ -1,3 +1,4 @@
+/*Leonardo Loureiro Costa*/
 #ifndef GAMEOFLIFE_H
 #define GAMEOFLIFE_H
 

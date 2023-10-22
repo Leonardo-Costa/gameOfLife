@@ -1,3 +1,4 @@
+/*Leonardo Loureiro Costa*/
 #include "gameoflife.h"
 #include <stdio.h>
 #include <stdlib.h>

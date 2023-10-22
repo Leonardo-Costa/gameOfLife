@@ -1,3 +1,4 @@
+#Leonardo Loureiro Costa
 from funcs import getPerformance, writeCSV
 
 def generateData():
