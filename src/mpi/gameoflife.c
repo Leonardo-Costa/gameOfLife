@@ -6,14 +6,6 @@
 #include <time.h>
 #include <mpi.h>
 
-struct ThreadData
-{
-  float ***grid;
-  float ***newGrid;
-  int start_row;
-  int end_row;
-};
-
 void fillGrid(float ***grid)
 {
   for (int i = 0; i < row; i++)
@@ -109,7 +101,6 @@ int getNeighbors(float **grid, int i, int j)
 
 void updateState(float ***grid, float ***newGrid, int numProcessors, int rank)
 {
-  // printf("dentro da updateState\n");
   int numberOfRow = row / numProcessors;
   int remainder = row % numProcessors;
   int currentRow = 0;
@@ -121,8 +112,6 @@ void updateState(float ***grid, float ***newGrid, int numProcessors, int rank)
   {
     endRow += remainder;
   }
-
-  // printf("processo %d\nstartRow: %d, endRow: %d\n", rank, startRow, endRow);
 
   for (int i = startRow; i < endRow; i++)
   {
